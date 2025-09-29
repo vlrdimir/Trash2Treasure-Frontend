@@ -176,6 +176,7 @@ export const authConfig = {
         "/settings",
         "/upload",
         "/blog",
+        "/history",
       ];
 
       const isRestricted = protectedRoutes.some((route) =>
