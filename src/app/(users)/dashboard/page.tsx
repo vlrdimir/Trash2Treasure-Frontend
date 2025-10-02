@@ -1,7 +1,10 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ScanLine, Recycle, Bot } from "lucide-react";
+import { ArrowRight, ScanLine, Recycle, Bot, Newspaper } from "lucide-react";
 import type { Metadata } from "next";
+import { allPosts } from "contentlayer/generated";
+import { compareDesc } from "date-fns";
+import NewsCarousel from "@/components/blog/NewsCarousel";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -9,6 +12,11 @@ export const metadata: Metadata = {
 };
 
 export default function DashboardPage() {
+  const posts = allPosts.sort((a, b) =>
+    compareDesc(new Date(a.date), new Date(b.date)),
+  );
+  const latestPosts = posts.slice(0, 5);
+
   return (
     <>
       <header className="border-border bg-background/80 sticky top-0 z-10 flex items-center justify-between border-b p-4 backdrop-blur-lg">
@@ -37,6 +45,18 @@ export default function DashboardPage() {
                 Pindai Sekarang <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </div>
+          </CardContent>
+        </Card>
+
+        <Card className="bg-card border-border shadow-lg">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-xl">
+              <Newspaper className="h-6 w-6" />
+              Berita & Inspirasi Terbaru
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <NewsCarousel posts={latestPosts} />
           </CardContent>
         </Card>
 
