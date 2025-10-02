@@ -8,8 +8,10 @@ import { ScanLoading } from "./scan-loading";
 import dataURLtoFile from "@/lib/dataUrlToFile";
 import { PermissionBlockedWarning } from "./permission-blocked-warning";
 import { WebcamView } from "./webcam-view";
+import { useRouter } from "next/navigation";
 
 export function WebcamScanner({ token }: { token: string }) {
+  const router = useRouter();
   const { imgSrc, setImgSrc, captureTrigger, retake } = useWebcamStore();
   const webcamRef = useRef<Webcam>(null);
   const mutation = usePredictMutation();
@@ -87,7 +89,7 @@ export function WebcamScanner({ token }: { token: string }) {
         {
           onSuccess: (data) => {
             console.log(data, "resp predict");
-            alert(`Prediksi berhasil: ${data.result.label}`);
+            router.push(`/history/${data.result.id}`);
             retake();
           },
           onError: (error) => {

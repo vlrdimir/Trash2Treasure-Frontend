@@ -6,8 +6,10 @@ import { UploadScanner } from "./upload-scanner";
 import { usePredictMutation } from "@/hooks/use-predict-mutation";
 import { ScanLoading } from "./scan-loading";
 import { Upload, Trash2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export function UploadForm({ token }: { token: string }) {
+  const router = useRouter();
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const mutation = usePredictMutation();
@@ -39,7 +41,7 @@ export function UploadForm({ token }: { token: string }) {
         { image: file, token },
         {
           onSuccess: (data) => {
-            alert(`Prediksi berhasil: ${data.result.label}`);
+            router.push(`/history/${data.result.id}`);
             handleRemoveFile(); // Clear file after success
           },
           onError: (error) => {

@@ -5,6 +5,7 @@ import type { ApiResponse } from "@/types/api";
 type PredictionResponse = ApiResponse<PredictionResult>;
 type PredictImageVariables = { image: File; token: string };
 type PredictionResult = {
+  id: string;
   label: string;
   probs: number[];
   percentage: number;
