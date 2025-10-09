@@ -155,7 +155,12 @@ export default function ProviderWrapper({
             <p className="text-muted-foreground mb-4 text-sm">
               {suggestion?.description}
             </p>
-            <Link href={`/blog?category=${result.label}`} passHref>
+            <Link
+              href={`/chat/new?label=${result.label}&image=${encodeURIComponent(
+                result.imageUrlRemoveBg,
+              )}`}
+              passHref
+            >
               <Button className="w-full">
                 <Sparkles className="mr-2 h-4 w-4" />
                 Lihat Ide Kerajinan
