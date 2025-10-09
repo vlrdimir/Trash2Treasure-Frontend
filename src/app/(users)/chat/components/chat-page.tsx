@@ -11,6 +11,7 @@ interface ChatPageProps {
   conversationId: string;
   initialMessages: UIMessage[];
   isNew: boolean;
+  tokenMax: boolean;
   imageUrl?: string;
   label?: string;
 }
@@ -19,6 +20,7 @@ export default function ChatPage({
   conversationId,
   initialMessages,
   isNew,
+  tokenMax,
   imageUrl,
   label,
 }: ChatPageProps) {
@@ -107,16 +109,24 @@ export default function ChatPage({
 
       {/* Sticky Footer */}
       <div className="sticky bottom-0 z-10 bg-white">
+        {tokenMax && (
+          <div className="mx-4 mb-2 rounded-2xl border border-red-200 bg-red-50 p-3 text-center text-sm text-red-700">
+            Anda telah mencapai batas maksimum percakapan.
+          </div>
+        )}
         <div className="p-4">
           <ChatInput
             value={chat.input}
             onChange={chat.setInput}
             onSend={handleSendMessage}
             isLoading={chat.isLoading}
-            placeholder="Ask me anything..."
+            placeholder={
+              tokenMax ? "Batas percakapan tercapai" : "Ask me anything..."
+            }
             imagePreviewUrl={imagePreviewUrl}
             onImageChange={handleImageChange}
             onClearImage={handleClearImage}
+            disabled={tokenMax || chat.isLoading}
           />
         </div>
         <FooterNav />

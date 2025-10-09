@@ -25,6 +25,9 @@ function Provider({
   }
 
   const isNew = conversation?.result.messages.length === 0;
+  const tokenMax = (conversation?.result.tokenUsage ?? 0) > 3000;
+  console.log(tokenMax, "tokenMax");
+  console.log(conversation?.result.tokenUsage, "tokenUsage");
 
   return (
     <ChatPage
@@ -33,6 +36,7 @@ function Provider({
       label={label}
       imageUrl={image}
       isNew={isNew}
+      tokenMax={tokenMax}
     />
   );
 }

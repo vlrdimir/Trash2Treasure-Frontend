@@ -5,10 +5,11 @@ import {
   createIdGenerator,
 } from "ai";
 import { azure } from "@ai-sdk/azure";
-import { saveChatConversation } from "@/hooks/use-conversation";
+import {
+  getConversationById,
+  saveChatConversation,
+} from "@/hooks/use-conversation";
 import auth from "@/middleware";
-
-// import { loadConversation, saveConversation } from "@/utils/chat-store";
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
@@ -20,14 +21,21 @@ export async function POST(req: Request) {
     conversationId,
   }: { message: UIMessage; conversationId: string } = await req.json();
 
+  const conversation = await getConversationById({
+    conversationId,
+    token: session?.tokenId ?? "",
+  });
+  const tokenUsage = conversation?.result.tokenUsage ?? 0;
+  const tokenMax = tokenUsage > 3000;
+  if (tokenMax) {
+    return new Response("Anda telah mencapai batas maksimum percakapan.", {
+      status: 400,
+    });
+  }
+
   console.log(message, "message client");
   console.log(conversationId, "conversationId client");
 
-  // Load previous messages from database
-  // const previousMessages = await loadConversation(conversationId);
-
-  // Append new message to previous messages
-  // const messages = [...previousMessages, message];
   const messages = [message];
 
   const result = streamText({

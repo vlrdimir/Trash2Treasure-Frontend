@@ -12,6 +12,7 @@ interface ChatInputProps {
   imagePreviewUrl: string | null;
   onImageChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onClearImage: () => void;
+  disabled?: boolean;
 }
 
 export default function ChatInput({
@@ -23,6 +24,7 @@ export default function ChatInput({
   imagePreviewUrl,
   onImageChange,
   onClearImage,
+  disabled = false,
 }: ChatInputProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -34,7 +36,7 @@ export default function ChatInput({
   };
 
   const isSendEnabled =
-    (value.trim().length > 0 || !!imagePreviewUrl) && !isLoading;
+    (value.trim().length > 0 || !!imagePreviewUrl) && !isLoading && !disabled;
 
   return (
     <div className="relative overflow-hidden rounded-3xl border border-gray-200 bg-white p-4 shadow-sm">
@@ -70,7 +72,7 @@ export default function ChatInput({
           onClick={() => fileInputRef.current?.click()}
           className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full border border-gray-200 bg-gray-50 text-gray-500 transition-colors hover:bg-gray-100"
           aria-label="Attach image"
-          disabled={isLoading}
+          disabled={isLoading || disabled}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -92,7 +94,7 @@ export default function ChatInput({
           onChange={(e) => onChange(e.target.value)}
           onKeyPress={handleKeyPress}
           placeholder={placeholder}
-          disabled={isLoading}
+          disabled={isLoading || disabled}
           className="max-h-32 min-h-[44px] flex-1 resize-none border-none bg-transparent py-2 text-black placeholder-gray-400 outline-none"
           rows={1}
         />
