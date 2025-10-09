@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, ScanLine, User, Bookmark, History, Camera } from "lucide-react";
+import { Home, ScanLine, User, History, Camera, Bot } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { useWebcamStore } from "@/hooks/use-webcam-store";
@@ -13,7 +13,7 @@ const navItemsLeft = [
 ];
 
 const navItemsRight = [
-  { href: "/saved", icon: Bookmark, label: "Tersimpan" },
+  { href: "/chat", icon: Bot, label: "AI Chat" },
   { href: "/profile", icon: User, label: "Profil" },
 ];
 

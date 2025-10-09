@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { allPosts } from "contentlayer/generated";
 import { compareDesc } from "date-fns";
 import NewsCarousel from "@/components/blog/NewsCarousel";
+import { FooterNav } from "@/components/footer-nav";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -122,6 +123,11 @@ export default function DashboardPage() {
           </CardContent>
         </Card>
       </main>
+
+      {/* Sticky Footer */}
+      <div className="sticky bottom-0 z-10 bg-white">
+        <FooterNav />
+      </div>
     </>
   );
 }

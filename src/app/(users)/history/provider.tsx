@@ -8,6 +8,7 @@ import { useHistoryListQuery } from "@/hooks/use-history-queries";
 import HistoryPagination from "./pagination";
 import { useHistoryPaginationStore } from "@/hooks/use-history-pagination-store";
 import type { HistoryResultItem } from "@/types/api";
+import { FooterNav } from "@/components/footer-nav";
 
 const formatDate = (dateString: string) => {
   const date = new Date(dateString);
@@ -109,6 +110,11 @@ export default function HistoryPage({ token }: { token: string }) {
         ))}
       </main>
       {pagination && <HistoryPagination />}
+
+      {/* Sticky Footer */}
+      <div className="sticky bottom-0 z-10 bg-white">
+        <FooterNav />
+      </div>
     </div>
   );
 }
