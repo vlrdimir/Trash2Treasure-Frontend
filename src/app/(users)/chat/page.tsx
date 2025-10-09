@@ -1,11 +1,23 @@
-import ChatLayout from "@/components/chat/chat-layout";
+import { getQueryClient } from "@/app/get-query-client";
+import { listConversation } from "@/hooks/use-conversation";
+import auth from "@/middleware";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import ChatPageProvider from "./provider";
 
-export default function Page() {
+async function Page() {
+  const queryClient = getQueryClient();
+  const session = await auth();
+  const token = session?.tokenId ?? "";
+
+  await queryClient.prefetchQuery({
+    queryKey: ["conversations", "list", { page: 1, limit: 10, token }],
+    queryFn: async () => listConversation({ token, page: 1, limit: 10 }),
+  });
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center p-4">
-      <div className="fixed inset-0 h-full w-full p-4">
-        <ChatLayout />
-      </div>
-    </div>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <ChatPageProvider token={token} />
+    </HydrationBoundary>
   );
 }
+
+export default Page;
