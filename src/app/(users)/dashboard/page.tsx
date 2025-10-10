@@ -1,5 +1,4 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowRight, Recycle, Bot, Newspaper } from "lucide-react";
 import type { Metadata } from "next";
 import { allPosts } from "contentlayer/generated";
 import { compareDesc } from "date-fns";
@@ -8,6 +7,12 @@ import { FooterNav } from "@/components/footer-nav";
 import auth from "@/middleware";
 import Image from "next/image";
 import CardScan from "./components/card-scan";
+import Provider from "./components/provider";
+import { getQueryClient } from "@/app/get-query-client";
+import { getDashboard } from "@/lib/api/dashboard";
+import { HydrationBoundary } from "@tanstack/react-query";
+import { dehydrate } from "@tanstack/react-query";
+import { Newspaper } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -16,14 +21,20 @@ export const metadata: Metadata = {
 
 export default async function Page() {
   const session = await auth();
+  const queryClient = getQueryClient();
 
   const posts = allPosts.sort((a, b) =>
     compareDesc(new Date(a.date), new Date(b.date)),
   );
   const latestPosts = posts.slice(0, 5);
 
+  await queryClient.prefetchQuery({
+    queryKey: ["dashboard", session?.tokenId],
+    queryFn: async () => getDashboard(session?.tokenId ?? ""),
+  });
+
   return (
-    <>
+    <HydrationBoundary state={dehydrate(queryClient)}>
       <header className="border-border bg-background/80 sticky top-0 z-10 flex items-center justify-between border-b p-4 backdrop-blur-lg">
         <div>
           <p className="text-muted-foreground">Selamat Datang,</p>
@@ -55,73 +66,13 @@ export default async function Page() {
           </CardContent>
         </Card>
 
-        <Card className="bg-card border-border shadow-lg">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-xl">
-              <Bot className="h-6 w-6" />
-              Riwayat Pindai Terbaru
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="bg-muted rounded-full p-2">
-                  <Recycle className="h-5 w-5" />
-                </div>
-                <div>
-                  <p className="font-semibold">Botol Plastik</p>
-                  <p className="text-muted-foreground text-sm">
-                    Hari ini, 09:12
-                  </p>
-                </div>
-              </div>
-              <ArrowRight className="text-muted-foreground h-5 w-5" />
-            </div>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="bg-muted rounded-full p-2">
-                  <Recycle className="h-5 w-5" />
-                </div>
-                <div>
-                  <p className="font-semibold">Kaleng Aluminium</p>
-                  <p className="text-muted-foreground text-sm">
-                    Kemarin, 15:30
-                  </p>
-                </div>
-              </div>
-              <ArrowRight className="text-muted-foreground h-5 w-5" />
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="bg-card border-border shadow-lg">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-xl">
-              <Recycle className="h-6 w-6" />
-              Kontribusi Lingkungan
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex items-center justify-between">
-              <p className="text-muted-foreground">Total Sampah Dipindai</p>
-              <p className="text-lg font-bold">142 Item</p>
-            </div>
-            <div className="flex items-center justify-between">
-              <p className="text-muted-foreground">Jenis Paling Umum</p>
-              <p className="text-lg font-bold">Plastik</p>
-            </div>
-            <div className="flex items-center justify-between">
-              <p className="text-muted-foreground">Potensi Daur Ulang</p>
-              <p className="text-lg font-bold text-green-500">Tinggi</p>
-            </div>
-          </CardContent>
-        </Card>
+        <Provider token={session?.tokenId ?? ""} />
       </main>
 
       {/* Sticky Footer */}
       <div className="sticky bottom-0 z-10 bg-white">
         <FooterNav />
       </div>
-    </>
+    </HydrationBoundary>
   );
 }
