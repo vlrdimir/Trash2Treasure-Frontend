@@ -171,7 +171,7 @@ export const authConfig = {
         "/dashboard",
         "/about",
         "/profile",
-        "/saved",
+        "/chat",
         "/scan",
         "/settings",
         "/upload",
