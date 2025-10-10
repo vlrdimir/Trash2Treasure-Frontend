@@ -30,6 +30,18 @@ function ContributionItemSkeleton() {
   );
 }
 
+function EmptyHistory() {
+  return (
+    <div className="text-muted-foreground flex flex-col items-center justify-center gap-2 p-4 text-center">
+      <Bot className="h-10 w-10" />
+      <p className="font-semibold">Belum Ada Riwayat</p>
+      <p className="text-sm">
+        Mulai pindai sampah untuk melihat riwayat Anda di sini.
+      </p>
+    </div>
+  );
+}
+
 interface HistoryItemProps {
   title: string;
   createdAt: string;
@@ -77,20 +89,25 @@ function Provider({ token }: { token: string }) {
             Riwayat Pindai Terbaru
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent>
           {isLoading ? (
-            <>
+            <div className="space-y-4">
               <HistoryItemSkeleton />
               <HistoryItemSkeleton />
-            </>
+            </div>
+          ) : data?.result.riwayatPindaiTerbaru &&
+            data.result.riwayatPindaiTerbaru.length > 0 ? (
+            <div className="space-y-4">
+              {data.result.riwayatPindaiTerbaru.map((item) => (
+                <HistoryItem
+                  key={item.id}
+                  title={item.title}
+                  createdAt={item.created_at}
+                />
+              ))}
+            </div>
           ) : (
-            data?.result.riwayatPindaiTerbaru.map((item) => (
-              <HistoryItem
-                key={item.id}
-                title={item.title}
-                createdAt={item.created_at}
-              />
-            ))
+            <EmptyHistory />
           )}
         </CardContent>
       </Card>

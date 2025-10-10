@@ -58,7 +58,7 @@ export default async function Page() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-xl">
               <Newspaper className="h-6 w-6" />
-              Berita & Inspirasi Terbaru
+              Berita
             </CardTitle>
           </CardHeader>
           <CardContent>
