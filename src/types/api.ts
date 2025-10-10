@@ -4,6 +4,7 @@ export interface HistoryResultItem {
   id: number;
   email: string;
   imageUrl: string;
+  imageUrlRemoveBg: string;
   label: string;
   percentage: string;
   probabilities: Probabilities;
