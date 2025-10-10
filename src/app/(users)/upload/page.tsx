@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import auth from "@/middleware";
 import { UploadForm } from "@/components/scan/upload-form";
+import { FooterNav } from "@/components/footer-nav";
 
 export default async function Page() {
   const sessions = await auth();
@@ -19,6 +20,11 @@ export default async function Page() {
           <h1 className="text-xl font-bold">Unggah Gambar</h1>
         </div>
         <UploadForm token={tokenId} />
+      </div>
+
+      {/* Sticky Footer */}
+      <div className="sticky bottom-0 z-10 bg-white">
+        <FooterNav />
       </div>
     </div>
   );

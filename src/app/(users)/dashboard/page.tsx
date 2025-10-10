@@ -29,9 +29,10 @@ export default async function Page() {
           <p className="text-muted-foreground">Selamat Datang,</p>
           <h1 className="text-2xl font-bold">{session?.user?.name}</h1>
         </div>
-        <div className="bg-muted h-12 w-12 rounded-full">
+        <div className="bg-muted h-12 w-12 overflow-hidden rounded-full">
           <Image
             src={session?.user?.image ?? ""}
+            className="h-full w-full rounded-full object-cover"
             alt="User"
             width={48}
             height={48}

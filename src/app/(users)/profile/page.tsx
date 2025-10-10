@@ -5,6 +5,7 @@ import { ChevronRight, Settings, HelpCircle } from "lucide-react";
 import Link from "next/link";
 import { FooterNav } from "@/components/footer-nav";
 import auth from "@/middleware";
+import { signOut } from "@/server/auth";
 
 const menuItems = [
   { href: "/settings", icon: Settings, label: "Pengaturan Akun" },
@@ -19,7 +20,11 @@ export default async function Page() {
       <main className="space-y-6 p-4">
         <div className="flex flex-col items-center space-y-2">
           <Avatar className="h-24 w-24">
-            <AvatarImage src={session?.user?.image ?? ""} alt="User" />
+            <AvatarImage
+              src={session?.user?.image ?? ""}
+              alt="User"
+              className="object-cover"
+            />
             <AvatarFallback>{session?.user?.name?.charAt(0)}</AvatarFallback>
           </Avatar>
           <h1 className="text-2xl font-bold">{session?.user?.name}</h1>
@@ -48,6 +53,12 @@ export default async function Page() {
         </Card>
 
         <Button
+          onClick={async () => {
+            "use server";
+            await signOut({
+              redirectTo: "/auth/signin",
+            });
+          }}
           variant="default"
           className="w-full bg-black text-white hover:bg-black/90"
         >
