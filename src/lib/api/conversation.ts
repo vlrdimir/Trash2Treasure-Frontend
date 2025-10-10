@@ -1,15 +1,14 @@
 import { fetcher, poster } from "@/lib/utils";
+import type {
+  createConversationPayload,
+  createConversationResponse,
+  metadata,
+  addChatConversationResponse,
+  addChatConversationPayload,
+  RespConversationById,
+  ListConversationResponse,
+} from "@/types/tConversations";
 import type { UIMessage } from "ai";
-
-export interface createConversationPayload {
-  imageUrl?: string;
-  label?: string;
-}
-
-export interface createConversationResponse {
-  status: boolean;
-  result: string;
-}
 
 export async function createConversationNew({
   data,
@@ -31,25 +30,6 @@ export async function createConversationNew({
   return response;
 }
 
-interface addChatConversationPayload {
-  conversation_id: string;
-  role: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  content: any;
-  tokens_used: number;
-}
-
-interface addChatConversationResponse {
-  status: boolean;
-  result: string;
-}
-
-interface metadata {
-  createdAt: number;
-  model: string;
-  totalTokens: number;
-}
-
 export async function saveChatConversation({
   token,
   conversationId,
@@ -61,7 +41,6 @@ export async function saveChatConversation({
 }) {
   // Then insert all messages
   const messagesToInsert = messages.map((msg) => {
-    // Extract token data from metadata if it exists (for assistant messages)
     const metadata = (
       msg as unknown as {
         metadata: metadata;
@@ -97,29 +76,6 @@ export async function saveChatConversation({
   return response;
 }
 
-interface RespConversationById {
-  status: boolean;
-  result: {
-    id: string;
-    email: string;
-    title: string;
-    initialLabel: string;
-    initialImageUrl: string;
-    tokenUsage: number;
-    createdAt: string;
-    updatedAt: string;
-    messages: {
-      id: string;
-      role: string;
-      parts: {
-        text?: string;
-        type: string;
-        state?: string;
-      }[];
-    }[];
-  };
-}
-
 export async function getConversationById({
   token,
   conversationId,
@@ -132,32 +88,6 @@ export async function getConversationById({
     token,
   );
   return response;
-}
-
-interface ConversationItem {
-  id: string;
-  email: string;
-  title: string;
-  initialLabel: string;
-  initialImageUrl: string;
-  tokenUsage: number | null;
-  createdAt: string;
-  updatedAt: string;
-}
-
-interface Pagination {
-  page: number;
-  limit: number;
-  totalItems: number;
-  totalPages: number;
-  hasNextPage: boolean;
-  hasPreviousPage: boolean;
-}
-
-interface ListConversationResponse {
-  status: boolean;
-  result: ConversationItem[];
-  pagination: Pagination;
 }
 
 export async function listConversation({

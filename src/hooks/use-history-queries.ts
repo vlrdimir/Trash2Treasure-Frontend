@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import type { ApiResponse, HistoryResultItem } from "@/types/api";
-import { useHistoryPaginationStore } from "./use-history-pagination-store";
+import { useHistoryPaginationStore } from "./store/use-history-pagination-store";
 import { fetcher } from "@/lib/utils";
 
 export const fetcherHistoryList = <T>(
