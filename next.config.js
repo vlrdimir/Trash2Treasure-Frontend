@@ -11,7 +11,11 @@ const config = {
     domains: [
       "i.pinimg.com",
       "github.com",
+      "cdn.dontdemoit.com",
+      "not-lain-background-removal.hf.space",
       "pub-fd8694d56e144f3bbfac5aedbf111b5a.r2.dev",
+      "lh3.googleusercontent.com",
+      "asset.kompas.com",
     ],
   },
 };
