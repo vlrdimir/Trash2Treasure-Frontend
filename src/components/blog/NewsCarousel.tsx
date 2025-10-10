@@ -27,19 +27,19 @@ export default function NewsCarousel({ posts }: NewsCarouselProps) {
       >
         {posts.map((post) => (
           <SwiperSlide key={post._id}>
-            <Link href={post.url}>
-              <div className="relative h-48 w-full overflow-hidden rounded-lg">
-                <Image
-                  src={post.image}
-                  alt={post.title}
-                  layout="fill"
-                  objectFit="cover"
-                  className="transition-transform duration-300 ease-in-out hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-                <div className="absolute bottom-0 left-0 p-4">
-                  <h3 className="font-bold text-white">{post.title}</h3>
-                  <p className="text-sm text-gray-300">
+            <Link href={post.url} className="block">
+              <div className="space-y-2">
+                <div className="relative h-48 w-full overflow-hidden rounded-lg">
+                  <Image
+                    src={post.image}
+                    alt={post.title}
+                    fill
+                    className="object-cover transition-transform duration-300 ease-in-out hover:scale-105"
+                  />
+                </div>
+                <div>
+                  <h3 className="leading-snug font-bold">{post.title}</h3>
+                  <p className="text-muted-foreground text-sm">
                     {format(new Date(post.date), "dd MMMM yyyy")}
                   </p>
                 </div>

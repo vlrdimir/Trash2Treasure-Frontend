@@ -28,7 +28,7 @@ export default async function BlogPostPage({
   }
 
   return (
-    <PostLayout token={token!} post={post}>
+    <PostLayout post={post}>
       <MDXLayoutRenderer code={post.body.code} components={components} />
     </PostLayout>
   );

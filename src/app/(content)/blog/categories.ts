@@ -9,63 +9,8 @@ export type CategoryCount = {
 
 export const categories: CategoryCount[] = [
   {
-    "name": "clothes",
+    "name": "berita",
     "count": 3,
-    "slug": "clothes"
-  },
-  {
-    "name": "plastic",
-    "count": 3,
-    "slug": "plastic"
-  },
-  {
-    "name": "biological",
-    "count": 3,
-    "slug": "biological"
-  },
-  {
-    "name": "trash",
-    "count": 3,
-    "slug": "trash"
-  },
-  {
-    "name": "green-glass",
-    "count": 3,
-    "slug": "green-glass"
-  },
-  {
-    "name": "paper",
-    "count": 3,
-    "slug": "paper"
-  },
-  {
-    "name": "cardboard",
-    "count": 3,
-    "slug": "cardboard"
-  },
-  {
-    "name": "metal",
-    "count": 3,
-    "slug": "metal"
-  },
-  {
-    "name": "brown-glass",
-    "count": 3,
-    "slug": "brown-glass"
-  },
-  {
-    "name": "shoes",
-    "count": 3,
-    "slug": "shoes"
-  },
-  {
-    "name": "battery",
-    "count": 3,
-    "slug": "battery"
-  },
-  {
-    "name": "white-glass",
-    "count": 3,
-    "slug": "white-glass"
+    "slug": "berita"
   }
 ];
