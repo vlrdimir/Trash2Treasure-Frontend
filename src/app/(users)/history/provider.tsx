@@ -79,6 +79,11 @@ export default function HistoryPage({ token }: { token: string }) {
         <p className="text-muted-foreground mt-2">
           Anda belum memiliki riwayat pemindaian.
         </p>
+
+        {/* Sticky Footer */}
+        <div className="sticky bottom-0 z-10 bg-white">
+          <FooterNav />
+        </div>
       </div>
     );
   }

@@ -53,6 +53,11 @@ export default function ChatPageProvider({ token }: { token: string }) {
         <Link href="/chat/new" className="text-primary mt-2">
           Mulai percakapan baru
         </Link>
+
+        {/* Sticky Footer */}
+        <div className="sticky bottom-0 z-10 bg-white">
+          <FooterNav />
+        </div>
       </div>
     );
   }
