@@ -18,6 +18,10 @@
     "gen:categories": "npm run build:content && node scripts/generate-categories.mjs"
   },
   "dependencies": {
+    "@ai-sdk/azure": "^2.0.45",
+    "@ai-sdk/google": "^2.0.17",
+    "@ai-sdk/openai": "^2.0.42",
+    "@ai-sdk/react": "^2.0.60",
     "@radix-ui/react-avatar": "^1.1.10",
     "@radix-ui/react-label": "^2.1.7",
     "@radix-ui/react-slot": "^1.2.3",
@@ -25,6 +29,7 @@
     "@t3-oss/env-nextjs": "^0.12.0",
     "@tanstack/react-query": "^5.90.2",
     "@tanstack/react-query-devtools": "^5.90.2",
+    "ai": "^5.0.60",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "contentlayer2": "^0.5.8",
@@ -39,6 +44,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-dropzone": "^14.3.8",
+    "react-markdown": "^10.1.0",
     "react-webcam": "^7.2.0",
     "rehype-autolink-headings": "^7.1.0",
     "rehype-slug": "^6.0.0",
@@ -46,7 +52,7 @@
     "sonner": "^2.0.7",
     "swiper": "^12.0.2",
     "tailwind-merge": "^3.3.1",
-    "zod": "^3.24.2",
+    "zod": "^3.25.76",
     "zustand": "^5.0.8"
   },
   "devDependencies": {
