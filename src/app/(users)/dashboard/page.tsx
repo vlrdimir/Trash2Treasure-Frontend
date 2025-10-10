@@ -6,13 +6,17 @@ import { allPosts } from "contentlayer/generated";
 import { compareDesc } from "date-fns";
 import NewsCarousel from "@/components/blog/NewsCarousel";
 import { FooterNav } from "@/components/footer-nav";
+import auth from "@/middleware";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Dashboard",
   description: "Dashboard for waste classification project",
 };
 
-export default function DashboardPage() {
+export default async function Page() {
+  const session = await auth();
+
   const posts = allPosts.sort((a, b) =>
     compareDesc(new Date(a.date), new Date(b.date)),
   );
@@ -23,9 +27,16 @@ export default function DashboardPage() {
       <header className="border-border bg-background/80 sticky top-0 z-10 flex items-center justify-between border-b p-4 backdrop-blur-lg">
         <div>
           <p className="text-muted-foreground">Selamat Datang,</p>
-          <h1 className="text-2xl font-bold">Pengguna Kreatif</h1>
+          <h1 className="text-2xl font-bold">{session?.user?.name}</h1>
         </div>
-        <div className="bg-muted h-12 w-12 rounded-full"></div>
+        <div className="bg-muted h-12 w-12 rounded-full">
+          <Image
+            src={session?.user?.image ?? ""}
+            alt="User"
+            width={48}
+            height={48}
+          />
+        </div>
       </header>
 
       <main className="space-y-6 p-4">

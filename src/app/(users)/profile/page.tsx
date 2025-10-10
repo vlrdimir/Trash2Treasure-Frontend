@@ -4,23 +4,26 @@ import { Button } from "@/components/ui/button";
 import { ChevronRight, Settings, HelpCircle } from "lucide-react";
 import Link from "next/link";
 import { FooterNav } from "@/components/footer-nav";
+import auth from "@/middleware";
 
 const menuItems = [
   { href: "/settings", icon: Settings, label: "Pengaturan Akun" },
   { href: "/about", icon: HelpCircle, label: "Tentang Aplikasi" },
 ];
 
-export default function ProfilePage() {
+export default async function Page() {
+  const session = await auth();
+
   return (
     <>
       <main className="space-y-6 p-4">
         <div className="flex flex-col items-center space-y-2">
           <Avatar className="h-24 w-24">
-            <AvatarImage src="https://github.com/shadcn.png" alt="User" />
-            <AvatarFallback>U</AvatarFallback>
+            <AvatarImage src={session?.user?.image ?? ""} alt="User" />
+            <AvatarFallback>{session?.user?.name?.charAt(0)}</AvatarFallback>
           </Avatar>
-          <h1 className="text-2xl font-bold">Pengguna Kreatif</h1>
-          <p className="text-muted-foreground">user@example.com</p>
+          <h1 className="text-2xl font-bold">{session?.user?.name}</h1>
+          <p className="text-muted-foreground">{session?.user?.email}</p>
         </div>
 
         <Card className="bg-card border-border py-0 shadow-lg">
