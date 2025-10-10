@@ -61,14 +61,23 @@ export function useChat(
       messageParts.push({ type: "text", text: messageContent });
     }
     if (imageUrl) {
-      // The image URL should be a data URL (e.g., base64 encoded)
-      messageParts.push({
-        type: "image",
-        image: imageUrl,
-        providerOptions: {
-          openai: { imageDetail: "low" },
-        },
-      });
+      if (imageUrl.startsWith("data:image")) {
+        // It's a base64 data URL from file upload, we can keep imageDetail low
+        messageParts.push({
+          type: "image",
+          image: imageUrl,
+          providerOptions: {
+            openai: { imageDetail: "low" },
+          },
+        });
+      } else {
+        // It's an HTTP/HTTPS URL, use it directly.
+        // Let the AI model fetch it, we can use high detail.
+        messageParts.push({
+          type: "image",
+          image: imageUrl,
+        });
+      }
     }
 
     // Send to AI using AI SDK

@@ -35,16 +35,8 @@ export default function ChatPage({
         hasSentInitialMessage.current = true;
         setIsFetchingImage(true);
         try {
-          const response = await fetch(imageUrl);
-          if (!response.ok) throw new Error("Gagal mengambil gambar");
-          const blob = await response.blob();
-          const reader = new FileReader();
-          reader.onloadend = async () => {
-            const dataUrl = reader.result as string;
-            const prompt = `Berdasarkan gambar ini, berikan saya satu ide kerajinan tangan yang paling menarik. Fokus utamanya adalah pada objek "${label}". Jelaskan langkah-langkahnya secara singkat dan bahan apa saja yang dibutuhkan.`;
-            await chat.sendMessage(prompt, dataUrl);
-          };
-          reader.readAsDataURL(blob);
+          const prompt = `Berdasarkan gambar ini, berikan saya satu ide kerajinan tangan yang paling menarik. Fokus utamanya adalah pada objek "${label}". Jelaskan langkah-langkahnya secara singkat dan bahan apa saja yang dibutuhkan.`;
+          await chat.sendMessage(prompt, imageUrl);
         } catch (error) {
           console.error("Gagal mengirim pesan otomatis:", error);
           hasSentInitialMessage.current = false;
