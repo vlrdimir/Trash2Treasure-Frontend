@@ -5,6 +5,7 @@ import { ArrowRight, Bot, Recycle } from "lucide-react";
 
 import { Skeleton } from "@/components/ui/skeleton";
 import { useDashboard } from "@/hooks/useDashboard";
+import Link from "next/link";
 
 function HistoryItemSkeleton() {
   return (
@@ -45,11 +46,12 @@ function EmptyHistory() {
 interface HistoryItemProps {
   title: string;
   createdAt: string;
+  id: string;
 }
 
-function HistoryItem({ title, createdAt }: HistoryItemProps) {
+function HistoryItem({ title, createdAt, id }: HistoryItemProps) {
   return (
-    <div className="flex items-center justify-between">
+    <Link href={`/history/${id}`} className="flex items-center justify-between">
       <div className="flex items-center gap-3">
         <div className="bg-muted rounded-full p-2">
           <Recycle className="h-5 w-5" />
@@ -65,7 +67,7 @@ function HistoryItem({ title, createdAt }: HistoryItemProps) {
         </div>
       </div>
       <ArrowRight className="text-muted-foreground h-5 w-5" />
-    </div>
+    </Link>
   );
 }
 
@@ -103,6 +105,7 @@ function Provider({ token }: { token: string }) {
                   key={item.id}
                   title={item.title}
                   createdAt={item.created_at}
+                  id={item.id.toString()}
                 />
               ))}
             </div>
