@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { UploadScanner } from "./upload-scanner";
-import { usePredictMutation } from "@/hooks/use-predict-mutation";
+import { usePredictMutation } from "@/hooks/usePredict";
 import { ScanLoading } from "./scan-loading";
 import { Upload, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";

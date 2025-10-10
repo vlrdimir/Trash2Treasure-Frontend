@@ -1,6 +1,6 @@
 "use client";
 
-import { useHistoryPaginationStore } from "@/hooks/use-history-pagination-store";
+import { useHistoryPaginationStore } from "@/hooks/store/use-history-pagination-store";
 
 export default function HistoryPagination() {
   const { page, totalPages, prevPage, nextPage } = useHistoryPaginationStore();

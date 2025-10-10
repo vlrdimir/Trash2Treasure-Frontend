@@ -1,5 +1,5 @@
 import { getQueryClient } from "@/app/get-query-client";
-import { getConversationById } from "@/hooks/use-conversation";
+import { getConversationById } from "@/lib/api/conversation";
 import auth from "@/middleware";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import Provider from "./provider";

@@ -9,7 +9,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { useConversationPaginationStore } from "@/hooks/use-conversation-pagination-store";
+import { useConversationPaginationStore } from "@/hooks/store/use-conversation-pagination-store";
 
 export default function ChatPagination({ totalPages }: { totalPages: number }) {
   const { page, setPage, nextPage, prevPage } =

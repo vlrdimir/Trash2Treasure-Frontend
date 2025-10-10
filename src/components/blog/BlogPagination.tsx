@@ -1,6 +1,6 @@
 "use client";
 
-import { usePaginationStore } from "@/hooks/use-pagination-store";
+import { usePaginationStore } from "@/hooks/store/use-pagination-store";
 import { cn } from "@/lib/utils";
 import React from "react";
 

@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { Home, ScanLine, User, History, Camera, Bot } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import { useWebcamStore } from "@/hooks/use-webcam-store";
+import { useWebcamStore } from "@/hooks/store/use-webcam-store";
 
 const navItemsLeft = [
   { href: "/dashboard", icon: Home, label: "Beranda" },

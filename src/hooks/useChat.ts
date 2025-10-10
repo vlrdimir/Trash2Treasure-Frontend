@@ -3,7 +3,7 @@ import { DefaultChatTransport, type UIMessage } from "ai";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { getQueryClient } from "@/app/get-query-client";
-import { useConversationPaginationStore } from "./use-conversation-pagination-store";
+import { useConversationPaginationStore } from "./store/use-conversation-pagination-store";
 
 export function useChat(
   conversationId?: string,

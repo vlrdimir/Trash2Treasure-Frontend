@@ -1,6 +1,6 @@
 "use client";
 
-import { usePaginationStore } from "@/hooks/use-pagination-store";
+import { usePaginationStore } from "@/hooks/store/use-pagination-store";
 import type { Post } from "@/types/post";
 import React, { useEffect } from "react";
 import PostCard from "./PostCard";

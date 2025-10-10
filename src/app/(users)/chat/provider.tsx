@@ -1,6 +1,6 @@
 "use client";
 
-import { useConversationPaginationStore } from "@/hooks/use-conversation-pagination-store";
+import { useConversationPaginationStore } from "@/hooks/store/use-conversation-pagination-store";
 import { useConversationListQuery } from "@/hooks/useConversation-list";
 import { Card } from "@/components/ui/card";
 import Link from "next/link";

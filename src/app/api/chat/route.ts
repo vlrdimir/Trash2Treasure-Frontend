@@ -8,7 +8,7 @@ import { azure } from "@ai-sdk/azure";
 import {
   getConversationById,
   saveChatConversation,
-} from "@/hooks/use-conversation";
+} from "@/lib/api/conversation";
 import auth from "@/middleware";
 
 // Allow streaming responses up to 30 seconds

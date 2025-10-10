@@ -6,7 +6,7 @@ import { ArrowRight, History, Recycle } from "lucide-react";
 import Link from "next/link";
 import { useHistoryListQuery } from "@/hooks/use-history-queries";
 import HistoryPagination from "./pagination";
-import { useHistoryPaginationStore } from "@/hooks/use-history-pagination-store";
+import { useHistoryPaginationStore } from "@/hooks/store/use-history-pagination-store";
 import type { HistoryResultItem } from "@/types/api";
 import { FooterNav } from "@/components/footer-nav";
 

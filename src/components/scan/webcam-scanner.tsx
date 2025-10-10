@@ -2,8 +2,8 @@
 
 import { useRef, useCallback, useEffect, useState } from "react";
 import type Webcam from "react-webcam";
-import { useWebcamStore } from "@/hooks/use-webcam-store";
-import { usePredictMutation } from "@/hooks/use-predict-mutation";
+import { useWebcamStore } from "@/hooks/store/use-webcam-store";
+import { usePredictMutation } from "@/hooks/usePredict";
 import { ScanLoading } from "./scan-loading";
 import dataURLtoFile from "@/lib/dataUrlToFile";
 import { PermissionBlockedWarning } from "./permission-blocked-warning";

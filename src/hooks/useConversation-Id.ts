@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getConversationById } from "./use-conversation";
+import { getConversationById } from "../lib/api/conversation";
 
 export const useConversationId = ({
   token,

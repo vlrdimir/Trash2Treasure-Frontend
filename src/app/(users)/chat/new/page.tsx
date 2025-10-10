@@ -1,5 +1,5 @@
 import auth from "@/middleware";
-import { createConversationNew } from "@/hooks/use-conversation";
+import { createConversationNew } from "@/lib/api/conversation";
 import { redirect } from "next/navigation";
 
 async function Page({

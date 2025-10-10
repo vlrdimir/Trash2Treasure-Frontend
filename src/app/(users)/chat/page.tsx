@@ -1,5 +1,5 @@
 import { getQueryClient } from "@/app/get-query-client";
-import { listConversation } from "@/hooks/use-conversation";
+import { listConversation } from "@/lib/api/conversation";
 import auth from "@/middleware";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import ChatPageProvider from "./provider";
