@@ -62,7 +62,7 @@ export async function saveChatConversation({
     };
   });
 
-  console.log(messagesToInsert, "messagesToInsert insert");
+  // console.log(messagesToInsert, "messagesToInsert insert");
 
   const response = await poster<
     addChatConversationResponse,
