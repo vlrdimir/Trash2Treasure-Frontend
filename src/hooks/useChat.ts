@@ -66,9 +66,6 @@ export function useChat(
         messageParts.push({
           type: "image",
           image: imageUrl,
-          providerOptions: {
-            openai: { imageDetail: "low" },
-          },
         });
       } else {
         // It's an HTTP/HTTPS URL, use it directly.

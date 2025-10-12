@@ -35,7 +35,7 @@ export default function ChatPage({
         hasSentInitialMessage.current = true;
         setIsFetchingImage(true);
         try {
-          const prompt = `Berdasarkan gambar ini, berikan saya satu ide kerajinan tangan yang paling menarik. Fokus utamanya adalah pada objek "${label}". Jelaskan langkah-langkahnya secara singkat dan bahan apa saja yang dibutuhkan.`;
+          const prompt = `Berdasarkan gambar ini, berikan saya satu ide kerajinan tangan yang paling menarik. Jelaskan langkah-langkahnya secara singkat dan bahan apa saja yang dibutuhkan.`;
           await chat.sendMessage(prompt, imageUrl);
         } catch (error) {
           console.error("Gagal mengirim pesan otomatis:", error);
@@ -78,14 +78,14 @@ export default function ChatPage({
 
   return (
     <div className="flex h-[calc(100dvh-5rem)] flex-col bg-white text-black">
-      {isFetchingImage && (
+      {/* {isFetchingImage && (
         <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-white/70 backdrop-blur-sm">
           <div className="h-8 w-8 animate-spin rounded-full border-4 border-black/20 border-t-black"></div>
           <p className="mt-4 text-black">
             Mempersiapkan ide dari gambar Anda...
           </p>
         </div>
-      )}
+      )} */}
 
       {/* Main Chat Content */}
       <main className="flex-1 overflow-y-auto p-4">
