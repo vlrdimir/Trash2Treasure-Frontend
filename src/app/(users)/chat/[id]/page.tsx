@@ -16,7 +16,7 @@ export default async function ConversationPage({
   const session = await auth();
   const queryClient = getQueryClient();
 
-  await queryClient.prefetchQuery({
+  void queryClient.prefetchQuery({
     queryKey: ["conversationId", id],
     queryFn: () =>
       getConversationById({

@@ -9,7 +9,7 @@ async function Page() {
   const session = await auth();
   const token = session?.tokenId ?? "";
 
-  await queryClient.prefetchQuery({
+  void queryClient.prefetchQuery({
     queryKey: ["conversations", "list", { page: 1, limit: 10, token }],
     queryFn: async () => listConversation({ token, page: 1, limit: 10 }),
   });

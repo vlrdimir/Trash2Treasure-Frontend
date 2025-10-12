@@ -9,7 +9,7 @@ export default async function Page() {
   const session = await auth();
   const token = session?.tokenId ?? "";
 
-  await queryClient.prefetchQuery({
+  void queryClient.prefetchQuery({
     queryKey: ["history", "list", { page: 1, limit: 10, token }],
     queryFn: async () => fetcherHistoryList(1, 10, token),
   });

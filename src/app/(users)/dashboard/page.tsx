@@ -28,7 +28,7 @@ export default async function Page() {
   );
   const latestPosts = posts.slice(0, 5);
 
-  await queryClient.prefetchQuery({
+  void queryClient.prefetchQuery({
     queryKey: ["dashboard", session?.tokenId],
     queryFn: async () => getDashboard(session?.tokenId ?? ""),
   });

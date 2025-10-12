@@ -14,7 +14,7 @@ export default async function Page({
   const session = await auth();
   const token = session?.tokenId ?? "";
 
-  await queryClient.prefetchQuery({
+  void queryClient.prefetchQuery({
     queryKey: ["history", "detail", id, token],
     queryFn: async () => fetcherHistoryDetail(parseInt(id), token),
   });
