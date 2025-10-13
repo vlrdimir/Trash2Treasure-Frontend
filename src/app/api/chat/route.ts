@@ -93,13 +93,14 @@ export async function POST(req: Request) {
         };
       }
     },
-    onFinish: ({ messages }) => {
+    onFinish: async ({ messages }) => {
       // Save the complete conversation including the new AI response
-      void saveChatConversation({
+      const res = await saveChatConversation({
         conversationId,
         messages,
         token: session?.tokenId ?? "",
       });
+      console.log(res, "ini res");
     },
   });
 }
