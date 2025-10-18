@@ -84,7 +84,7 @@ export default function ChatPageProvider({ token }: { token: string }) {
                 </div>
                 <div className="mt-2 flex items-center gap-2">
                   <div className="text-primary-foreground bg-primary w-fit rounded-full px-2 py-0.5 text-xs">
-                    {formatTokenUsage(convo.tokenUsage ?? 0, 3000)}
+                    {formatTokenUsage(convo.tokenUsage ?? 0, 4500)}
                   </div>
                 </div>
               </Card>

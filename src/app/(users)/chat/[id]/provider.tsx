@@ -25,7 +25,7 @@ function Provider({
   }
 
   const isNew = conversation?.result.messages.length === 0;
-  const tokenMax = (conversation?.result.tokenUsage ?? 0) > 3000;
+  const tokenMax = (conversation?.result.tokenUsage ?? 0) > 4500;
   console.log(tokenMax, "tokenMax");
   console.log(conversation?.result.tokenUsage, "tokenUsage");
 
