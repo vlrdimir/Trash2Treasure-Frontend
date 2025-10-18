@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useHistoryDetailQuery } from "@/hooks/use-history-queries";
 import { craftSuggestions } from "@/lib/utils";
+import { env } from "@/env";
 
 export default function ProviderWrapper({
   token,
@@ -157,7 +158,7 @@ export default function ProviderWrapper({
             </p>
             <Link
               href={`/chat/new?label=${result.label}&image=${encodeURIComponent(
-                result.imageUrlRemoveBg,
+                `${env.NEXT_PUBLIC_R2_URL}/${result.imageUrlRemoveBg}`,
               )}`}
               passHref
             >
