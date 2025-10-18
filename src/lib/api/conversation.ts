@@ -34,10 +34,14 @@ export async function saveChatConversation({
   token,
   conversationId,
   messages,
+  title,
+  newtokenUsage,
 }: {
   token: string;
   conversationId: string;
   messages: UIMessage[];
+  title?: string;
+  newtokenUsage?: number;
 }) {
   // Then insert all messages
   const messagesToInsert = messages.map((msg) => {
@@ -57,7 +61,7 @@ export async function saveChatConversation({
       content: {
         parts: msg.parts,
       },
-      tokens_used: tokensUsed,
+      tokens_used: tokensUsed + (newtokenUsage ?? 0),
       // model: model,
     };
   });
@@ -66,10 +70,11 @@ export async function saveChatConversation({
 
   const response = await poster<
     addChatConversationResponse,
-    { args: addChatConversationPayload[] }
+    { args: addChatConversationPayload[]; title: string }
   >(`/v2/conversation`, token, {
     arg: {
       args: messagesToInsert,
+      title: title ?? "",
     },
   });
 
