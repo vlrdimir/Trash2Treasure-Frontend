@@ -17,6 +17,8 @@ import auth from "@/middleware";
 export const maxDuration = 30;
 
 export async function POST(req: Request) {
+  const url = new URL(req.url);
+
   const session = await auth();
   const {
     message,
@@ -28,7 +30,7 @@ export async function POST(req: Request) {
     token: session?.tokenId ?? "",
   });
   const tokenUsage = conversation?.result.tokenUsage ?? 0;
-  const tokenMax = tokenUsage > 3000;
+  const tokenMax = tokenUsage > 4500;
   if (tokenMax) {
     return new Response("Anda telah mencapai batas maksimum percakapan.", {
       status: 400,
@@ -54,8 +56,6 @@ export async function POST(req: Request) {
       });
     }
   });
-
-  console.log(messages, "ini messages");
 
   const result = streamText({
     // model: google("gemini-2.5-flash-preview-09-2025"),
@@ -94,11 +94,30 @@ export async function POST(req: Request) {
       }
     },
     onFinish: async ({ messages }) => {
+      let newTitle = "";
+      let newTokenUsage = 0;
+
+      if (!conversation.result.title) {
+        const generateTitle = await fetch(`${url.origin}/api/generate-title`, {
+          method: "POST",
+          body: JSON.stringify({
+            messages,
+            conversationId,
+          }),
+        });
+
+        const { title, tokenUsage } = await generateTitle.json();
+        newTitle = title;
+        newTokenUsage = tokenUsage ?? 0;
+      }
+
       // Save the complete conversation including the new AI response
       const res = await saveChatConversation({
         conversationId,
         messages,
         token: session?.tokenId ?? "",
+        title: newTitle || conversation.result.title,
+        newtokenUsage: newTokenUsage ?? 0,
       });
       console.log(res, "ini res");
     },
