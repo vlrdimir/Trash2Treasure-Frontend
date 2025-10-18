@@ -25,6 +25,10 @@ export async function POST(req: Request) {
     conversationId,
   }: { message: UIMessage; conversationId: string } = await req.json();
 
+  if (!session?.tokenId) {
+    return Response.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   const conversation = await getConversationById({
     conversationId,
     token: session?.tokenId ?? "",
@@ -97,13 +101,21 @@ export async function POST(req: Request) {
       let newTitle = "";
       let newTokenUsage = 0;
 
-      if (!conversation.result.title) {
+      if (
+        !conversation.result.title ||
+        conversation.result.title.length === 0
+      ) {
         const generateTitle = await fetch(`${url.origin}/api/generate-title`, {
           method: "POST",
           body: JSON.stringify({
             messages,
             conversationId,
           }),
+          credentials: "same-origin",
+          headers: {
+            "Content-Type": "application/json",
+            cookie: req.headers.get("cookie") ?? "",
+          },
         });
 
         const { title, tokenUsage } = await generateTitle.json();
